@@ -1,0 +1,61 @@
+package sample;
+
+
+import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Controller {
+
+    @FXML
+    private LineChart<?, ?> line_chart;
+
+    @FXML
+    private CategoryAxis x;
+
+    @FXML
+    private NumberAxis y;
+
+
+    public void postr(){
+        String[] LinesAsArray;
+
+        try {
+            //чтение из файла
+            BufferedReader br = new BufferedReader(new FileReader("E:\\Projects\\GrafIsFile\\src\\sample\\1.txt"));
+            String line;
+
+            List<String> lines = new ArrayList<String>();
+            while ((line = br.readLine())!=null){
+                lines.add(line);
+            }
+
+            LinesAsArray = lines.toArray(new String[lines.size()]);
+            
+            //работа с графиком
+            line_chart.setTitle("Nu vashe");
+
+            XYChart.Series series = new XYChart.Series();
+
+            for (int i = 0; i <LinesAsArray.length ; i++) {
+
+                series.getData().add(new XYChart.Data(String.valueOf(i),Double.valueOf(LinesAsArray[i])));
+
+            }
+
+            line_chart.getData().addAll(series);
+
+        } catch (Exception e){
+            System.out.print("Что-то пошло не так");
+        }
+
+
+    }
+}
