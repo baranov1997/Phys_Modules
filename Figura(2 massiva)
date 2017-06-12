@@ -1,0 +1,92 @@
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int Nx1 = 12;
+        int Ny1 = 52;
+
+        int Nx2 = 302;
+        int Ny2 = 302;
+
+        int [][] m11 = new int[Ny1][Nx1];
+        int [][] m12 = new int[Ny1][Nx1];
+
+        int [][] m21 = new int[Ny2][Nx2];
+        int [][] m22 = new int[Ny2][Nx2];
+
+        for (int i = 0; i <Ny2 ; i++) {
+            for (int j = 0; j < Nx2; j++) {
+                m21[i][j] = 0;
+            }
+        }
+
+        for (int i = 0; i <Ny1 ; i++) {
+            for (int j = 0; j < Nx1; j++) {
+                m11[i][j] = 0;
+            }
+        }
+
+        for (int i = 1; i <Ny1-1 ; i++) {
+
+            for (int j = 1; j <Nx1-1 ; j++) {
+
+                m11[i][j] = 300;
+            }
+
+        }
+
+        for (int i = 1; i <Ny2-1 ; i++) {
+
+            for (int j = 1; j <Nx2-1 ; j++) {
+
+                m21[i][j] = 300;
+            }
+
+        }
+
+        for (int i = 1; i <Ny1-1 ; i++) {
+            for (int j = 1; j <Nx1-1 ; j++) {
+                //m12[i][j] = m11[i-1][j]+m11[i+1][j]+m11[i][j-1]+m11[i][j+1];
+                if (i == Ny1-2) {
+
+                    //m21!!!!
+                    m12[i][j] = m11[i-1][j]+m21[1][j+140]+m11[i][j-1]+m11[i][j+1];
+                } else {
+                    //m11!!!!!!
+                    m12[i][j] = m11[i-1][j]+m11[i+1][j]+m11[i][j-1]+m11[i][j+1];
+                }
+            }
+        }
+
+        for (int i = 1; i <Ny2-1 ; i++) {
+            for (int j = 1; j <Nx2-1 ; j++) {
+                //m12[i][j] = m11[i-1][j]+m11[i+1][j]+m11[i][j-1]+m11[i][j+1];
+                if ((i == 1)&&(j>140)&&(j<151)) {
+                    //m22!!!!
+                    m22[i][j] = m12[Ny1-2][j-140]+m21[1][j+140]+m21[i][j-1]+m21[i][j+1];
+                } else {
+                    //m22!!!!!!
+                    m22[i][j] = m21[i-1][j]+m21[i+1][j]+m21[i][j-1]+m21[i][j+1];
+                }
+            }
+        }
+
+
+
+        vivod(m12,Nx1,Ny1);
+    }
+
+
+
+    private static void vivod(int[][] m1, int a, int b) {
+
+        for (int i = 1; i <b-1 ; i++) {
+
+            for (int j = 1; j <a-1 ; j++) {
+                System.out.print(m1[i][j]+"\t\t");
+            }
+            System.out.println();
+        }
+    }
+}
