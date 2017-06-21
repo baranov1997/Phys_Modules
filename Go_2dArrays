@@ -1,0 +1,4 @@
+  mas := make([][]int, Ny)
+	for i := range mas {
+		mas[i] = make([]int, Nx)
+  }
